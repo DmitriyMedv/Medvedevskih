@@ -51,7 +51,7 @@ namespace WindowsFormsApp1
 
             foreach (var usbDevice in usbDevices)
             {
-                richTextBox1.Text = "Device ID: {0}, PNP Device ID: {1}, Description: {2} \n";
+                richTextBox1.Text += "\nDevice ID: {0}, PNP Device ID: {1}, Description: {2} \n";
                 richTextBox1.Text += usbDevice.DeviceID + "\n";
                 richTextBox1.Text += usbDevice.PnpDeviceID + "\n";
                 richTextBox1.Text += usbDevice.Description;
