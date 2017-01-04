@@ -51,10 +51,11 @@ namespace WindowsFormsApp1
 
             foreach (var usbDevice in usbDevices)
             {
-                richTextBox1.Text += "\nDevice ID: {0}, PNP Device ID: {1}, Description: {2} \n";
-                richTextBox1.Text += usbDevice.DeviceID + "\n";
-                richTextBox1.Text += usbDevice.PnpDeviceID + "\n";
-                richTextBox1.Text += usbDevice.Description;
+                //richTextBox1.Text += "\nDevice ID: {0}, PNP Device ID: {1}, Description: {2} \n";
+                richTextBox1.Text += "\n" + usbDevice.DeviceID;
+                if (usbDevice.DeviceID == "USB\\VID_1A40&PID_0101\\5&ECB7860&0&6") { pictureBox9.Visible = false; } else { pictureBox9.Visible = true; };
+                //richTextBox1.Text += usbDevice.PnpDeviceID + "\n";
+                //richTextBox1.Text += usbDevice.Description;
             }
 
             
