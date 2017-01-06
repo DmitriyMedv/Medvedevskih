@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -17,23 +18,20 @@ namespace WindowsFormsApp1
 
     public partial class Form1 : System.Windows.Forms.Form
     {
-  //      public UsbDevice MyUsbDevice;
-    //    public UsbDeviceFinder MyUsbFinder = new UsbDeviceFinder(0x1A40, 0x0101);//VID; PID
-        //-------------------------
-      
-        public void Button2_Click(object sender, EventArgs e)
+       
+        public void button2_Click(object sender, EventArgs e)
         {
             //Form2 frm = new Form2();
             //frm.Show();
            
-
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-         
+            
         }
 
+       // public Form1_() { }
 
         public Form1()
         {
@@ -42,23 +40,40 @@ namespace WindowsFormsApp1
 
         private void ОПрограммеToolStripMenuItem_Click(object sender, EventArgs e)
         {
-        
+            AboutBox1 Abfrm = new AboutBox1();
+            Abfrm.Show();
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
+            
+            //string currentPath = Directory.GetCurrentDirectory();
+            string currentPath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            //string currentPath = ""
+            if (!Directory.Exists(Path.Combine(currentPath, DateTime.Now.ToString("ddMMyyyy"))))
+                Directory.CreateDirectory(Path.Combine(currentPath, DateTime.Now.ToString("ddMMyyyy")));
+
+
             var usbDevices = GetUSBDevices();
+            pictureBox9.Visible = true;
+            pictureBox10.Visible = false;//-------------
+            pictureBox11.Visible = true;
 
             foreach (var usbDevice in usbDevices)
             {
-                richTextBox1.Text += "\nDevice ID: {0}, PNP Device ID: {1}, Description: {2} \n";
-                richTextBox1.Text += usbDevice.DeviceID + "\n";
-                richTextBox1.Text += usbDevice.PnpDeviceID + "\n";
-                richTextBox1.Text += usbDevice.Description;
+                //---------------------------------
+                //kvm-switch
+                if (usbDevice.DeviceID == "USB\\VID_1A40&PID_0101\\5&ECB7860&0&6") pictureBox9.Visible = false;
+                //usb-hub
+                if (usbDevice.DeviceID == "USB\\VID_1A40&PID_0201\\6&1F0E0D5E&0&2") pictureBox11.Visible = false;
+                
+                //---------------------------------
             }
 
-            
-            Console.Read();
+
+
+
+          
 
              List<USBDeviceInfo> GetUSBDevices()
             {
@@ -96,22 +111,38 @@ namespace WindowsFormsApp1
             //-------------------------------------------------
 
         }
-
-            
-            //GetDeviceList
-            //  MyUsbDevice = UsbDevice.OpenUsbDevice(MyUsbFinder);
-           /* if ()//MyUsbDevice != null)
-            {
-                label5.Text = " подключено !";
-            }
-            else label5.Text = " не найдено !";
-            */
-
-    
-
+        
         private object GetUSBDevices()
         {
             throw new NotImplementedException();
+        }
+
+        private void pictureBox9_Click(object sender, EventArgs e)
+        {
+
+            if(pictureBox9.Visible)
+            {
+                Form2 frm = new Form2();
+                frm.label1.Text = "KVM-switch \n находится в обрыве";
+                frm.Show();
+
+            }
+        }
+
+        private void pictureBox11_Click(object sender, EventArgs e)
+        {
+            if (pictureBox11.Visible)
+            {
+                Form2 frm = new Form2();
+                frm.label1.Text = "USB-hub \n находится в обрыве";
+                frm.Show();
+
+            }
+        }
+
+        private void tabPage2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

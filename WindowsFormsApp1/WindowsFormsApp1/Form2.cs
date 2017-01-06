@@ -16,5 +16,10 @@ namespace WindowsFormsApp1
         {
             InitializeComponent();
         }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            pictureBox1.Image = WindowsFormsApp1.Properties.Resources.green_light;
+        }                      //WindowsFormsApp1.Properties.Resources.red_light
     }
 }
