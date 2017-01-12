@@ -42,7 +42,7 @@ namespace WindowsFormsApp1
             FileStream Logs = new FileStream(LogFile, FileMode.Append);
             StreamWriter writer = new StreamWriter(Logs); //создаем «потоковый писатель» и связываем его с файловым потоком 
             writer.Write("\nSmartHome streeeeeeeeeeeaaaaam\n------\n"+currentTime+"Start application"); //записываем в файл
-            writer.Close(); //закрываем поток. Не закрыв поток, в файл ничего не запишется 
+            writer.Dispose(); //закрываем поток. Не закрыв поток, в файл ничего не запишется 
 
 
             // if(!File.Exists(LogFile))
